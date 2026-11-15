@@ -8,7 +8,7 @@ A diferencia de soluciones basadas en `swayidle` o `xautolock`, este proyecto fu
 
 - Compatible con **GNOME en Wayland y X11**.
 - Ejecución persistente en segundo plano mediante `systemd --user`.
-- **Anti-toques accidentales:** Requiere movimiento sostenido durante 2 segundos para cerrar el salvapantallas.
+- **Anti-toques accidentales:** Requiere movimiento sostenido durante 1 segundos para cerrar el salvapantallas.
 - Fácilmente personalizable para lanzar vídeos (`mpv`), animaciones de terminal (`cmatrix`, `asciiquarium`) o scripts propios.
 
 ## Estructura del proyecto
