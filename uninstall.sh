@@ -5,11 +5,9 @@ echo "Desinstalando Salvapantallas Personalizado..."
 # 1. Detener y deshabilitar el servicio
 systemctl --user disable --now salvapantallas.service 2>/dev/null
 
-# 2. Eliminar archivos instalados
+# 2. Eliminar servicio y directorio de instalación
 rm -f "$HOME/.config/systemd/user/salvapantallas.service"
-rm -f "$HOME/.salvapantallas.sh"
-rm -f "$HOME/.vigilante.sh"
-rm -f "$HOME/.salvapantallas.conf"
+rm -rf "$HOME/.salvapantallas"
 
 # 3. Limpiar archivo temporal PID si quedó abierto
 rm -f /tmp/salvapantallas.pid

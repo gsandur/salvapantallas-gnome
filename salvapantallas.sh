@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIG_FILE="$HOME/.salvapantallas.conf"
+CONFIG_FILE="$HOME/.salvapantallas/.salvapantallas.conf"
 PID_FILE="/tmp/salvapantallas.pid"
 
 # Cargar configuración (por defecto cmatrix si no existe el archivo)

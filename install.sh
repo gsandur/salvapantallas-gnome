@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #!/bin/bash
-
-CONFIG_FILE="$HOME/.salvapantallas.conf"
+INSTALL_DIR="$HOME/.salvapantallas"
+CONFIG_FILE="$INSTALL_DIR/.salvapantallas.conf"
 
 echo "=================================================="
 echo "  Instalador de Salvapantallas para GNOME"
@@ -14,12 +14,16 @@ echo "  2) Vídeo o GIF personalizado en pantalla completa (mpv)"
 echo ""
 read -p "Selecciona una opción [1 o 2]: " OPCION
 
+# Crear directorio de instalación oculto
+mkdir -p "$INSTALL_DIR"
+
 case "$OPCION" in
     1)
         if ! command -v cmatrix >/dev/null 2>&1; then
             echo ""
             echo "Aviso: 'cmatrix' no está instalado en tu sistema."
             echo "Instálalo ejecutando: sudo apt install cmatrix"
+            exit 0
         fi
         echo "MODO=cmatrix" > "$CONFIG_FILE"
         echo "MEDIA=" >> "$CONFIG_FILE"
@@ -40,6 +44,7 @@ case "$OPCION" in
             echo ""
             echo "Aviso: 'mpv' no está instalado en tu sistema."
             echo "Instálalo ejecutando: sudo apt install mpv"
+            exit 0
         fi
 
         echo "MODO=media" > "$CONFIG_FILE"
@@ -53,6 +58,7 @@ case "$OPCION" in
 esac
 
 # 1. Instalar cmatriz para mostrar lluvia de caracteres
+echo ""
 echo "¿Desea instalar el servicio para mostrar salvapantallas?(si/no)"
 read respuesta
 
@@ -61,14 +67,12 @@ respuesta=$(echo "$respuesta" | tr '[:upper:]' '[:lower:]')
 
 if [ "$respuesta" = "si" ] || [ "$respuesta" = "s" ]; then
     echo "Instalando Salvapantallas para GNOME..."
-    # 0. Instalar cmatrix como tema del salvapantallas
-    apt install cmatrix
     # 1. Copiar scripts al directorio del usuario
-    cp salvapantallas.sh "$HOME/.salvapantallas.sh"
-    cp vigilante.sh "$HOME/.vigilante.sh"
+    cp salvapantallas.sh "$INSTALL_DIR/.salvapantallas.sh"
+    cp vigilante.sh "$INSTALL_DIR/.vigilante.sh"
     # 2. Dar permisos de ejecución
-    chmod +x "$HOME/.salvapantallas.sh"
-    chmod +x "$HOME/.vigilante.sh"
+    chmod +x "$INSTALL_DIR/.salvapantallas.sh"
+    chmod +x "$INSTALL_DIR/.vigilante.sh"
     # 3. Copiar el archivo de servicio de usuario en systemd
     mkdir -p "$HOME/.config/systemd/user"
     cp salvapantallas.service "$HOME/.config/systemd/user/salvapantallas.service"
