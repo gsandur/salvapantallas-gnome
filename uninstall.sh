@@ -9,7 +9,7 @@ systemctl --user disable --now salvapantallas.service 2>/dev/null
 rm -f "$HOME/.config/systemd/user/salvapantallas.service"
 rm -f "$HOME/.salvapantallas.sh"
 rm -f "$HOME/.vigilante.sh"
-apt remove cmatrix
+rm -f "$HOME/.salvapantallas.conf"
 
 # 3. Limpiar archivo temporal PID si quedó abierto
 rm -f /tmp/salvapantallas.pid

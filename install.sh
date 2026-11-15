@@ -1,7 +1,59 @@
 #!/bin/bash
 
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.salvapantallas.conf"
+
+echo "=================================================="
+echo "  Instalador de Salvapantallas para GNOME"
+echo "=================================================="
+echo ""
+echo "Elige qué tipo de salvapantallas quieres configurar:"
+echo "  1) Animación estilo Matrix en terminal (cmatrix)"
+echo "  2) Vídeo o GIF personalizado en pantalla completa (mpv)"
+echo ""
+read -p "Selecciona una opción [1 o 2]: " OPCION
+
+case "$OPCION" in
+    1)
+        if ! command -v cmatrix >/dev/null 2>&1; then
+            echo ""
+            echo "Aviso: 'cmatrix' no está instalado en tu sistema."
+            echo "Instálalo ejecutando: sudo apt install cmatrix"
+        fi
+        echo "MODO=cmatrix" > "$CONFIG_FILE"
+        echo "MEDIA=" >> "$CONFIG_FILE"
+        echo "Configurado en modo Matrix."
+        ;;
+    2)
+        echo ""
+        read -p "Introduce la ruta completa del vídeo o GIF (ej. /home/$USER/Vídeos/fondo.mp4): " RUTA_MEDIA
+        # Expande la virgulilla (~) si el usuario la escribió
+        RUTA_MEDIA="${RUTA_MEDIA/#\~/$HOME}"
+
+        if [ ! -f "$RUTA_MEDIA" ]; then
+            echo "Error: No se encuentra el archivo '$RUTA_MEDIA'. Verifica la ruta e inténtalo de nuevo."
+            exit 1
+        fi
+
+        if ! command -v mpv >/dev/null 2>&1; then
+            echo ""
+            echo "Aviso: 'mpv' no está instalado en tu sistema."
+            echo "Instálalo ejecutando: sudo apt install mpv"
+        fi
+
+        echo "MODO=media" > "$CONFIG_FILE"
+        echo "MEDIA=\"$RUTA_MEDIA\"" >> "$CONFIG_FILE"
+        echo "Configurado con el archivo: $RUTA_MEDIA"
+        ;;
+    *)
+        echo "Opción no válida. Instalación cancelada."
+        exit 1
+        ;;
+esac
+
 # 1. Instalar cmatriz para mostrar lluvia de caracteres
-echo "¿Desea instalar cmatrix para mostrar salvapantallas?(si/no)"
+echo "¿Desea instalar el servicio para mostrar salvapantallas?(si/no)"
 read respuesta
 
 # Convertir la respuesta a minúsculas

@@ -2,7 +2,7 @@
 
 Daemon ligero en Bash que detecta la inactividad del sistema en escritorios **GNOME** mediante D-Bus (`org.gnome.Mutter.IdleMonitor`) y ejecuta un salvapantallas personalizado. 
 
-A diferencia de soluciones basadas en `swayidle` o `xautolock`, este proyecto funciona de forma nativa tanto en **Wayland** como en **X11**, e incluye protección contra toques accidentales exigiendo **2 segundos de movimiento continuo** para restaurar la sesión.
+A diferencia de soluciones basadas en `swayidle` o `xautolock`, este proyecto funciona de forma nativa tanto en **Wayland** como en **X11**, e incluye protección contra toques accidentales exigiendo **1 segundos de movimiento continuo** para restaurar la sesión.
 
 ## Características
 
@@ -14,19 +14,19 @@ A diferencia de soluciones basadas en `swayidle` o `xautolock`, este proyecto fu
 ## Estructura del proyecto
 
 - `salvapantallas.sh`: Define qué ocurre al `iniciar` y `detener` el salvapantallas.
-- `vigilante.sh`: Monitoriza el tiempo de inactividad vía D-Bus y gestiona el retardo de 2 segundos.
+- `vigilante.sh`: Monitoriza el tiempo de inactividad vía D-Bus y gestiona el retardo de 1 segundos.
 - `salvapantallas.service`: Unidad de `systemd --user` para la ejecución en segundo plano.
 - `install.sh` / `uninstall.sh`: Scripts automatizados de instalación y limpieza.
 
 ## Requisitos
 
-- Entorno de escritorio **GNOME**.
-- `dbus-send` (incluido por defecto en la mayoría de distribuciones Linux).
-- `mpv` (si utilizas la plantilla por defecto para reproducir vídeo).
+- Entorno de escritorio **GNOME** y `dbus-send`.
+- `cmatrix` (si eliges el modo Matrix): `sudo apt install cmatrix`
+- `mpv` (si eliges el modo vídeo/GIF): `sudo apt install mpv`
 
 ## Instalación
 
 1. Clona este repositorio:
    ```bash
-   git clone [https://github.com/gsandur/salvapantallas-gnome.git](https://github.com/gsandur/salvapantallas-gnome.git)
+   git clone https://github.com/gsandur/salvapantallas-gnome.git
    cd salvapantallas-gnome
