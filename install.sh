@@ -2,7 +2,7 @@
 
 #!/bin/bash
 INSTALL_DIR="$HOME/.salvapantallas"
-CONFIG_FILE="$INSTALL_DIR/.salvapantallas.conf"
+CONFIG_FILE="$INSTALL_DIR/salvapantallas.conf"
 
 echo "=================================================="
 echo "  Instalador de Salvapantallas para GNOME"
@@ -68,11 +68,11 @@ respuesta=$(echo "$respuesta" | tr '[:upper:]' '[:lower:]')
 if [ "$respuesta" = "si" ] || [ "$respuesta" = "s" ]; then
     echo "Instalando Salvapantallas para GNOME..."
     # 1. Copiar scripts al directorio del usuario
-    cp salvapantallas.sh "$INSTALL_DIR/.salvapantallas.sh"
-    cp vigilante.sh "$INSTALL_DIR/.vigilante.sh"
+    cp salvapantallas.sh "$INSTALL_DIR/salvapantallas.sh"
+    cp vigilante.sh "$INSTALL_DIR/vigilante.sh"
     # 2. Dar permisos de ejecución
-    chmod +x "$INSTALL_DIR/.salvapantallas.sh"
-    chmod +x "$INSTALL_DIR/.vigilante.sh"
+    chmod +x "$INSTALL_DIR/salvapantallas.sh"
+    chmod +x "$INSTALL_DIR/vigilante.sh"
     # 3. Copiar el archivo de servicio de usuario en systemd
     mkdir -p "$HOME/.config/systemd/user"
     cp salvapantallas.service "$HOME/.config/systemd/user/salvapantallas.service"

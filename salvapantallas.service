@@ -3,7 +3,7 @@ Description=Vigilante de salvapantallas personalizado
 After=graphical-session.target
 
 [Service]
-ExecStart=%h/.salvapantallas/.vigilante.sh
+ExecStart=%h/.salvapantallas/vigilante.sh
 Restart=always
 RestartSec=3
 

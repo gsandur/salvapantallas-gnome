@@ -3,7 +3,7 @@
 # --- CONFIGURACIÓN ---
 TIEMPO_INACTIVIDAD=180000  # Tiempo para activar el salvapantallas (en ms: 15000 = 15s)
 SEGUNDOS_PARA_VOLVER=1    # Segundos de movimiento continuo necesarios para desactivarlo
-SCRIPT_SALVAPANTALLAS="$HOME/.salvapantallas.sh"
+SCRIPT_SALVAPANTALLAS="$HOME/.salvapantallas/salvapantallas.sh"
 # ---------------------
 
 ACTIVO=0

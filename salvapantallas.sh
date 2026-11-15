@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIG_FILE="$HOME/.salvapantallas/.salvapantallas.conf"
+CONFIG_FILE="$HOME/.salvapantallas/salvapantallas.conf"
 PID_FILE="/tmp/salvapantallas.pid"
 
 # Cargar configuración (por defecto cmatrix si no existe el archivo)
@@ -17,8 +17,8 @@ case "$1" in
         fi
 
         if [ "$MODO" = "media" ] && [ -f "$MEDIA" ]; then
-            mpv --fs --loop --no-audio --no-osc --no-osd-bar --input-default-bindings=no "$MEDIA" >/dev/null 2>&1 &
-            echo $! > "$PID_FILE"
+           mpv --no-config --fs --loop-playlist=inf --loop-file=inf --no-audio --no-osc --no-osd-bar --input-default-bindings=no "$MEDIA" >/dev/null 2>&1 &
+           echo $! > "$PID_FILE"
         else
             gnome-terminal --full-screen --hide-menubar -- cmatrix -b -C green >/dev/null 2>&1 &
             echo $! > "$PID_FILE"
@@ -32,7 +32,7 @@ case "$1" in
         fi
         # Limpieza segura de los procesos hijos según el modo
         pkill -f "cmatrix -b -C green" 2>/dev/null
-        pkill -f "mpv --fs --loop" 2>/dev/null
+        pkill -f "mpv --no-config --fs" 2>/dev/null
         ;;
 
     *)
